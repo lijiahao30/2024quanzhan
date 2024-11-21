@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mp3", "mp3\mp3.csproj", "{69901874-3D93-468F-8D3A-4353D5A13692}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mp3.library", "mp3.library\mp3.library.csproj", "{53CE6E65-47D6-4C55-8791-B5F012062724}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mp3.test", "mp3.test\mp3.test.csproj", "{8420CE52-50A1-4F55-8870-BEE540CBAFCB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69901874-3D93-468F-8D3A-4353D5A13692}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69901874-3D93-468F-8D3A-4353D5A13692}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69901874-3D93-468F-8D3A-4353D5A13692}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69901874-3D93-468F-8D3A-4353D5A13692}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53CE6E65-47D6-4C55-8791-B5F012062724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53CE6E65-47D6-4C55-8791-B5F012062724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53CE6E65-47D6-4C55-8791-B5F012062724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53CE6E65-47D6-4C55-8791-B5F012062724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8420CE52-50A1-4F55-8870-BEE540CBAFCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8420CE52-50A1-4F55-8870-BEE540CBAFCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8420CE52-50A1-4F55-8870-BEE540CBAFCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8420CE52-50A1-4F55-8870-BEE540CBAFCB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,91 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactions;assembly=Avalonia.Xaml.Interactions"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             mc:Ignorable="d"
+             x:Class="mp3.Views.Mp3PlayerView"
+             xmlns:local="clr-namespace:mp3"
+             Width="600" Height="400"
+             DataContext="{Binding Mp3PlayerViewModel , Source={StaticResource ServiceLocator}}">
+    
+    <Interaction.Behaviors>
+        <ia:EventTriggerBehavior EventName="Initialized">
+            <ia:InvokeCommandAction Command="{Binding OnInitializedCommand}"/>
+        </ia:EventTriggerBehavior>
+    </Interaction.Behaviors>
+    
+    <Grid Background="LightGray" RowDefinitions="Auto, *, Auto" Margin="10">
+
+        <!-- 搜索区域 -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" >
+            <TextBox Width="400" Margin="0,0,10,0"
+                     Watermark="请输入歌曲名称..." 
+                     Text="{Binding SearchQuery}" />
+            <Button Margin="8,4,4,0" Content="搜索" Command="{Binding SearchCommand}"/>
+
+
+        </StackPanel>
+
+
+        <!-- 歌曲列表 -->
+        <ListBox Grid.Row="1" ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedSong}">
+            <Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="SelectionChanged">
+                    <ia:InvokeCommandAction Command="{Binding SelectedSongChangedCommand}" />
+                </ia:EventTriggerBehavior>
+            </Interaction.Behaviors>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Image Source="{Binding album.picUrl}" Width="50" Height="50" Margin="0,0,10,0" /> <!-- 专辑图片 -->
+                        <StackPanel>
+                            <TextBlock Text="{Binding name}" FontWeight="Bold" />
+                            <TextBlock Text="{Binding artists[0].name}" Foreground="Gray" />
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+
+
+        <!-- 控制区域 -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+            <Button Width="100" Command="{Binding PlayPreviousCommand}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Assets/Icons/previous.png" Width="16" Height="16" Margin="0,0,5,0" />
+                    <TextBlock VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+            <!-- 播放按钮 -->
+            <Button Width="100" Command="{Binding PlayCommand}" IsVisible="{Binding IsPlaying, Converter={StaticResource InverseBooleanConverter}}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Assets/Icons/play.png" Width="16" Height="16" Margin="0,0,5,0" />
+                    <TextBlock  VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+            <!-- 停止按钮 -->
+            <Button Width="100" Command="{Binding StopCommand}" IsVisible="{Binding IsPlaying}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Assets/Icons/stop.png" Width="16" Height="16" Margin="0,0,5,0" />
+                    <TextBlock  VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+            <Button Width="100" Command="{Binding PlayNextCommand}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Assets/Icons/next.png" Width="16" Height="16" Margin="0,0,5,0" />
+                    <TextBlock VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
+
+        
+    </Grid>
+    
+</UserControl>

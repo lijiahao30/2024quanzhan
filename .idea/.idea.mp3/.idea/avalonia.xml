@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="mp3/App.axaml" value="mp3/mp3.csproj" />
+        <entry key="mp3/Views/InitializationView.axaml" value="mp3/mp3.csproj" />
+        <entry key="mp3/Views/MainView.axaml" value="mp3/mp3.csproj" />
+        <entry key="mp3/Views/MainWindow.axaml" value="mp3/mp3.csproj" />
+        <entry key="mp3/Views/Mp3PlayerView.axaml" value="mp3/mp3.csproj" />
+        <entry key="mp3/Views/Window1.axaml" value="mp3/mp3.csproj" />
+        <entry key="mp3/Views/mp3.axaml" value="mp3/mp3.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

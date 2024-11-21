@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+      <PackageReference Include="NAudio" Version="2.2.1" />
+      <PackageReference Include="NAudio.WaveFormRenderer" Version="2.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Services\ISpotifyService.cs" />
+      <Compile Remove="Services\SpotifyService.cs" />
+      <Compile Remove="ViewModels\SpotifyViewModel.cs" />
+      <Compile Remove="ViewModels\MP3ViewModel.cs" />
+      <Compile Remove="ViewModels\MusicSearchViewModel.cs" />
+      <Compile Remove="Services\MP3Service.cs" />
+      <Compile Remove="Class1.cs" />
+      <Compile Remove="ViewModels\SimpleViewModel.cs" />
+    </ItemGroup>
+    <PropertyGroup>
+        <RootNamespace>mp3.library</RootNamespace>
+    </PropertyGroup>
+
+</Project>
