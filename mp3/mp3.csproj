@@ -12,6 +12,7 @@
         <Folder Include="Assets\Icons\" />
         <Folder Include="Models\"/>
         <AvaloniaResource Include="Assets\**"/>
+        <Folder Include="ViewModels\" />
     </ItemGroup>
     <PropertyGroup>
         <RootNamespace>mp3</RootNamespace>
@@ -23,6 +24,7 @@
       
             <PackageReference Include="Avalonia" Version="11.1.4" />
             <PackageReference Include="Avalonia.Desktop" Version="11.1.4"/>
+            <PackageReference Include="Avalonia.ReactiveUI" Version="11.1.4" />
             <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.4"/>
             <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.4"/>
             <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
@@ -51,5 +53,7 @@
     <ItemGroup>
       <Compile Remove="Views\Window1.axaml.cs" />
       <Compile Remove="Views\mp3.axaml.cs" />
+      <Compile Remove="ViewModels\ViewModelBase.cs" />
+      <Compile Remove="ViewModels\MainWindowViewModel.cs" />
     </ItemGroup>
 </Project>

@@ -1,7 +1,8 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using mp3.ViewModels;
+using mp3.library.ViewModels;
+
 
 namespace mp3;
 
@@ -14,6 +15,7 @@ public class ViewLocator : IDataTemplate
 
         var name = data.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal).Replace("mp3.library", "mp3", StringComparison.Ordinal);
         var type = Type.GetType(name);
+
 
         if (type != null)
         {

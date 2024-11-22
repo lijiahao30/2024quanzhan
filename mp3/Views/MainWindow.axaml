@@ -9,7 +9,7 @@
         d:DesignHeight="450"
         x:Class="mp3.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="dpa"
+        Title="心情日记"
         DataContext="{Binding  MainWindowViewModel , Source={StaticResource ServiceLocator}}"
         Content="{Binding Content}">
 

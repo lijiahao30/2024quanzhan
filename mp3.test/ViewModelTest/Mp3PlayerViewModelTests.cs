@@ -6,7 +6,7 @@ using Moq;
 using mp3.library.Models;
 using mp3.library.Services;
 using mp3.library.ViewModels;
-using mp3.ViewModels;
+
 using Assert = Xunit.Assert;
 
 namespace mp3.test.ViewModelTest

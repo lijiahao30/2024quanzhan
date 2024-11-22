@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using mp3.library.Services;
 using mp3.library.ViewModels;
 using mp3.service;
-using mp3.ViewModels;
+
 using MainWindowViewModel = mp3.library.ViewModels.MainWindowViewModel;
 
 namespace mp3
@@ -40,6 +40,9 @@ namespace mp3
             serviceCollection.AddSingleton<MainWindowViewModel>();
             serviceCollection.AddSingleton<InitializationViewModel>();
             serviceCollection.AddSingleton<IAlertService, AlertService>();
+            serviceCollection.AddSingleton<IRootNavigationService, RootNavigationService>();
+            serviceCollection.AddSingleton<IMenuNavigationService, MenuNavigationService>();
+            serviceCollection.AddSingleton<IContentNavigationService, ContentNavigationService>();
             serviceCollection.AddHttpClient();
             serviceCollection.AddSingleton<MainViewModel>();
             _serviceProvider = serviceCollection.BuildServiceProvider();
