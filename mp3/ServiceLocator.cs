@@ -34,6 +34,7 @@ namespace mp3
         public ServiceLocator()
         {
             var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<ImageService>();
             serviceCollection.AddSingleton<IMusicService, MusicService>();
             serviceCollection.AddSingleton<IAudioPlayer, AudioPlayer>();
             serviceCollection.AddSingleton<Mp3PlayerViewModel>();
@@ -45,6 +46,7 @@ namespace mp3
             serviceCollection.AddSingleton<IContentNavigationService, ContentNavigationService>();
             serviceCollection.AddHttpClient();
             serviceCollection.AddSingleton<MainViewModel>();
+         
             _serviceProvider = serviceCollection.BuildServiceProvider();
             
 

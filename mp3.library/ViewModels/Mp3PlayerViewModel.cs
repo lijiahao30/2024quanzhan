@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using mp3.library.Models;
+
 using mp3.library.Services;
 
 namespace mp3.library.ViewModels
@@ -13,6 +14,7 @@ namespace mp3.library.ViewModels
     {
         private readonly IMusicService _musicService;
         private readonly IAudioPlayer _audioPlayer;
+        private readonly ImageService _imageService;
 
        
         private string _searchQuery;
@@ -65,8 +67,9 @@ namespace mp3.library.ViewModels
         public ICommand PlayNextCommand { get; }
         public ICommand PlayPreviousCommand { get; }
         public ICommand SelectedSongChangedCommand { get; }
-        public Mp3PlayerViewModel(IMusicService musicService, IAudioPlayer audioPlayer)
+        public Mp3PlayerViewModel(IMusicService musicService, IAudioPlayer audioPlayer,ImageService imageService)
         {
+            _imageService = imageService;
             _musicService = musicService;
             _audioPlayer = audioPlayer;
 
@@ -87,7 +90,13 @@ namespace mp3.library.ViewModels
             OnInitializedCommand = new RelayCommand(OnInitialized);
         }
       
-
+        public async Task LoadSongImagesAsync(List<Song> songs) {
+            foreach (var song in songs) {
+                if (!string.IsNullOrEmpty(song.album.picUrl)) {
+                    song.AlbumImageBytes = await _imageService.DownloadImageAsync(song.album.picUrl);
+                }
+            }
+        }
         private void PlayNextSong()
         {
             if (Songs.Count == 0 || SelectedSong == null) return;
@@ -147,12 +156,28 @@ namespace mp3.library.ViewModels
             try
             {
                 Songs.Clear();
-                var songs = await _musicService.SearchMusicAsync(SearchQuery); // 获取所有结果
+
+                // 获取搜索结果（基础歌曲列表）
+                var songs = await _musicService.SearchMusicAsync(SearchQuery);
+
                 foreach (var song in songs)
                 {
                     if (!Songs.Contains(song))
                     {
-                        Songs.Add(song); // 添加每首歌曲到 ObservableCollection
+                        Songs.Add(song); // 添加到 ObservableCollection
+
+                        // 获取详细信息以补充 picUrl
+                        var songDetails = await _musicService.GetSongDetailAsync(song.id);
+                        if (songDetails != null)
+                        {
+                            song.album.picUrl = songDetails.album.picUrl; // 更新专辑图片 URL
+                            song.AlbumImageBytes = await _imageService.DownloadImageAsync(song.album.picUrl);
+                            if (song.AlbumImageBytes != null && song.AlbumImageBytes.Length > 0) {
+                                Console.WriteLine($"Downloaded image for {song.name}, Size: {song.AlbumImageBytes.Length} bytes");
+                            } else {
+                                Console.WriteLine($"Failed to download image for {song.name}");
+                            }
+                        }
                     }
                 }
             }
@@ -165,6 +190,7 @@ namespace mp3.library.ViewModels
                 IsSearching = false;
             }
         }
+
         /*private async Task SearchSongsAsync()
         {
             Console.WriteLine("Search Command Executed");

@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using Xunit;
 using Moq;
 using mp3.library.Models;
+
 using mp3.library.Services;
 using mp3.library.ViewModels;
 
@@ -17,7 +18,7 @@ namespace mp3.test.ViewModelTest
         private readonly Mock<IAudioPlayer> _audioPlayerMock;
         private readonly Mp3PlayerViewModel _viewModel;
 
-        public Mp3PlayerViewModelTests()
+        /*public Mp3PlayerViewModelTests()
         {
             // Mock 服务
             _musicServiceMock = new Mock<IMusicService>();
@@ -25,7 +26,7 @@ namespace mp3.test.ViewModelTest
 
             // 初始化 ViewModel
             _viewModel = new Mp3PlayerViewModel(_musicServiceMock.Object, _audioPlayerMock.Object);
-        }
+        }*/
 
         /*[Fact]
         public async Task SearchSongsAsync_AddsSongToList_WhenSearchQueryIsValid()

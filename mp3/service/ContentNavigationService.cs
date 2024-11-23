@@ -7,8 +7,8 @@ namespace mp3.service;
 public class ContentNavigationService : IContentNavigationService {
     public void NavigateTo(string view, object parameter = null) {
         ViewModelBase viewModel = view switch {
-            ContentNavigationConstant.Mp3PlayerView => ServiceLocator.Current
-                .Mp3PlayerViewModel,
+            /*ContentNavigationConstant.Mp3PlayerView => ServiceLocator.Current
+                .Mp3PlayerViewModel,*/
           
             _ => throw new Exception("未知的视图。")
         };

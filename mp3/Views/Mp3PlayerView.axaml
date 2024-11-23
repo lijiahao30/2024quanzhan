@@ -7,9 +7,14 @@
              mc:Ignorable="d"
              x:Class="mp3.Views.Mp3PlayerView"
              xmlns:local="clr-namespace:mp3"
+             xmlns:lc="using:mp3.Converters"
              Width="600" Height="400"
              DataContext="{Binding Mp3PlayerViewModel , Source={StaticResource ServiceLocator}}">
-    
+    <UserControl.Resources>
+      
+        <lc:ByteArrayToBitmapConverter x:Key="ByteArrayToBitmapConverter"></lc:ByteArrayToBitmapConverter>
+    </UserControl.Resources>
+
     <Interaction.Behaviors>
         <ia:EventTriggerBehavior EventName="Initialized">
             <ia:InvokeCommandAction Command="{Binding OnInitializedCommand}"/>
@@ -39,7 +44,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <Image Source="{Binding album.picUrl}" Width="50" Height="50" Margin="0,0,10,0" /> <!-- 专辑图片 -->
+                        <Image Source="{Binding AlbumImageBytes, Converter={StaticResource ByteArrayToBitmapConverter}}" 
+                               Width="50" Height="50" Margin="5" />
+
                         <StackPanel>
                             <TextBlock Text="{Binding name}" FontWeight="Bold" />
                             <TextBlock Text="{Binding artists[0].name}" Foreground="Gray" />
