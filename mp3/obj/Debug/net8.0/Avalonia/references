@@ -74,6 +74,10 @@ C:\Users\30753\.nuget\packages\reactiveui\18.3.1\lib\net6.0\ReactiveUI.dll
 C:\Users\30753\.nuget\packages\semi.avalonia\11.1.0.3\lib\net8.0\Semi.Avalonia.dll
 C:\Users\30753\.nuget\packages\skiasharp\2.88.8\lib\net6.0\SkiaSharp.dll
 C:\Users\30753\.nuget\packages\splat\14.4.1\lib\net6.0\Splat.dll
+C:\Users\30753\.nuget\packages\sqlite-net-pcl\1.9.172\lib\netstandard2.0\SQLite-net.dll
+C:\Users\30753\.nuget\packages\sqlitepclraw.bundle_green\2.1.2\lib\netstandard2.0\SQLitePCLRaw.batteries_v2.dll
+C:\Users\30753\.nuget\packages\sqlitepclraw.core\2.1.2\lib\netstandard2.0\SQLitePCLRaw.core.dll
+C:\Users\30753\.nuget\packages\sqlitepclraw.provider.e_sqlite3\2.1.2\lib\net6.0\SQLitePCLRaw.provider.e_sqlite3.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.8\ref\net8.0\System.AppContext.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.8\ref\net8.0\System.Buffers.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.8\ref\net8.0\System.Collections.Concurrent.dll
