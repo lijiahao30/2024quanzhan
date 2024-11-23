@@ -102,8 +102,6 @@
         
                 <Slider Width="300" Minimum="0" Maximum="1" 
                         Value="{Binding CurrentProgress, Mode=TwoWay}" />
-
-
         
                 <!-- 总时长 -->
                 <TextBlock Text="{Binding TotalDuration, StringFormat=mm\\:ss}" FontSize="14" Foreground="#333" />

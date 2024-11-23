@@ -34,15 +34,19 @@ namespace mp3.library.ViewModels
             get => _currentProgress;
             set
             {
-                if (SetProperty(ref _currentProgress, value))
+                if (Math.Abs(_currentProgress - value) > 0.01 && SetProperty(ref _currentProgress, value))
                 {
-                    // 当用户拖动进度条时，同步调整播放位置
-                    var newPosition = TimeSpan.FromSeconds(value * TotalDuration.TotalSeconds);
-                    _audioPlayer.Seek(newPosition);
+                    // 仅当用户手动拖动进度条时调整播放位置
+                    if (!_isUpdatingFromPlayback)
+                    {
+                        var newPosition = TimeSpan.FromSeconds(value * TotalDuration.TotalSeconds);
+                        _audioPlayer.Seek(newPosition);
+                    }
                 }
             }
         }
-
+      // 添加一个标志位用于区分是手动拖动还是播放触发的更新
+        private bool _isUpdatingFromPlayback;
         public TimeSpan CurrentTime
         {
             get => _currentTime;
@@ -131,11 +135,20 @@ namespace mp3.library.ViewModels
         {
             if (Songs.Count == 0 || SelectedSong == null) return;
 
+            // 获取当前歌曲的索引
             var currentIndex = Songs.IndexOf(SelectedSong);
-            var nextIndex = (currentIndex + 1) % Songs.Count; // 循环到第一首
+
+            // 确保索引有效
+            if (currentIndex == -1) return;
+
+            // 计算下一首的索引（支持循环）
+            var nextIndex = (currentIndex + 1) % Songs.Count;
+
+            // 设置下一首歌曲并播放
             SelectedSong = Songs[nextIndex];
-            PlaySongAsync(); // 播放下一首
+            _ = PlaySongAsync(); // 调用异步播放方法
         }
+
         private async Task PlaySelectedSong()
         {
             if (SelectedSong == null) return;
@@ -172,7 +185,7 @@ namespace mp3.library.ViewModels
 
             _progressTimer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromMilliseconds(5000) // 默认更新频率
+                Interval = TimeSpan.FromMilliseconds(1000) 
             };
 
             _progressTimer.Tick += UpdateProgress;
@@ -183,23 +196,40 @@ namespace mp3.library.ViewModels
         {
             if (!IsPlaying) return;
 
-            CurrentTime = _audioPlayer.GetCurrentTime();
-            CurrentProgress = CurrentTime.TotalSeconds / TotalDuration.TotalSeconds;
-
-            var remainingTime = TotalDuration - CurrentTime;
-
-            // 动态调整更新频率
-            if (remainingTime.TotalSeconds < 10)
+            try
             {
-                _progressTimer.Interval = TimeSpan.FromMilliseconds(200);
+                _isUpdatingFromPlayback = true; // 开始更新状态
+
+                // 缓存当前播放时间，避免频繁调用播放器的 GetCurrentTime
+                var currentTime = _audioPlayer.GetCurrentTime();
+
+                // 缓存总时长以减少频繁获取
+                if (TotalDuration == TimeSpan.Zero)
+                {
+                    TotalDuration = _audioPlayer.GetDuration();
+                }
+
+                CurrentTime = currentTime;
+                CurrentProgress = TotalDuration.TotalSeconds > 0
+                    ? currentTime.TotalSeconds / TotalDuration.TotalSeconds
+                    : 0;
+
+                // 检查是否播放完成
+                if (currentTime >= TotalDuration)
+                {
+                    OnPlaybackCompleted();
+                }
             }
-
-            // 检查播放是否完成
-            if (remainingTime <= TimeSpan.Zero)
+            catch (Exception ex)
             {
-                OnPlaybackCompleted();
+                Console.WriteLine($"Error in UpdateProgress: {ex.Message}");
+            }
+            finally
+            {
+                _isUpdatingFromPlayback = false; // 结束更新状态
             }
         }
+
 
         private void OnPlaybackCompleted()
         {
@@ -215,11 +245,20 @@ namespace mp3.library.ViewModels
         {
             if (Songs.Count == 0 || SelectedSong == null) return;
 
+            // 获取当前歌曲的索引
             var currentIndex = Songs.IndexOf(SelectedSong);
-            var previousIndex = (currentIndex - 1 + Songs.Count) % Songs.Count; // 循环到最后一首
+
+            // 确保索引有效
+            if (currentIndex == -1) return;
+
+            // 计算上一首的索引（支持循环）
+            var previousIndex = (currentIndex - 1 + Songs.Count) % Songs.Count;
+
+            // 设置上一首歌曲并播放
             SelectedSong = Songs[previousIndex];
-            PlaySongAsync(); // 播放上一首
+            _ = PlaySongAsync(); // 调用异步播放方法
         }
+
 
         private void OnInitialized()
         {
@@ -357,29 +396,34 @@ namespace mp3.library.ViewModels
 
         private async Task PlaySongAsync()
         {
-            Console.WriteLine("Play Command Executed");
             if (SelectedSong == null) return;
 
-            IsPlaying = true;
+            // 停止当前播放
+            _audioPlayer.Stop();
+            IsPlaying = false;
+
             try
             {
+                // 获取歌曲播放 URL
                 var url = await _musicService.GetSongUrlAsync(SelectedSong.id);
-                if (!string.IsNullOrWhiteSpace(url))
-                {
-                    _audioPlayer.Play(url);
-                    // 获取总时长并更新属性
-                    TotalDuration = _audioPlayer.GetDuration();
+                if (string.IsNullOrWhiteSpace(url)) return;
 
-                    // 开启计时器，动态更新播放进度
-                    StartProgressTimer();
-                }
+                // 播放歌曲
+                _audioPlayer.Play(url);
+                IsPlaying = true;
+
+                // 更新总时长
+                TotalDuration = _audioPlayer.GetDuration();
+
+                // 开启进度更新计时器
+                StartProgressTimer();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in PlaySongAsync: {ex.Message}");
             }
-          
         }
+
 
 
 
