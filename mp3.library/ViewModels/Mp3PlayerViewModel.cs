@@ -34,15 +34,19 @@ namespace mp3.library.ViewModels
             get => _currentProgress;
             set
             {
-                if (SetProperty(ref _currentProgress, value))
+                if (Math.Abs(_currentProgress - value) > 0.01 && SetProperty(ref _currentProgress, value))
                 {
-                    // 当用户拖动进度条时，同步调整播放位置
-                    var newPosition = TimeSpan.FromSeconds(value * TotalDuration.TotalSeconds);
-                    _audioPlayer.Seek(newPosition);
+                    // 仅当用户手动拖动进度条时调整播放位置
+                    if (!_isUpdatingFromPlayback)
+                    {
+                        var newPosition = TimeSpan.FromSeconds(value * TotalDuration.TotalSeconds);
+                        _audioPlayer.Seek(newPosition);
+                    }
                 }
             }
         }
-
+      // 添加一个标志位用于区分是手动拖动还是播放触发的更新
+        private bool _isUpdatingFromPlayback;
         public TimeSpan CurrentTime
         {
             get => _currentTime;
@@ -172,7 +176,7 @@ namespace mp3.library.ViewModels
 
             _progressTimer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromMilliseconds(5000) // 默认更新频率
+                Interval = TimeSpan.FromMilliseconds(1000) // 调整为更低的更新频率
             };
 
             _progressTimer.Tick += UpdateProgress;
@@ -183,23 +187,40 @@ namespace mp3.library.ViewModels
         {
             if (!IsPlaying) return;
 
-            CurrentTime = _audioPlayer.GetCurrentTime();
-            CurrentProgress = CurrentTime.TotalSeconds / TotalDuration.TotalSeconds;
-
-            var remainingTime = TotalDuration - CurrentTime;
-
-            // 动态调整更新频率
-            if (remainingTime.TotalSeconds < 10)
+            try
             {
-                _progressTimer.Interval = TimeSpan.FromMilliseconds(200);
+                _isUpdatingFromPlayback = true; // 开始更新状态
+
+                // 缓存当前播放时间，避免频繁调用播放器的 GetCurrentTime
+                var currentTime = _audioPlayer.GetCurrentTime();
+
+                // 缓存总时长以减少频繁获取
+                if (TotalDuration == TimeSpan.Zero)
+                {
+                    TotalDuration = _audioPlayer.GetDuration();
+                }
+
+                CurrentTime = currentTime;
+                CurrentProgress = TotalDuration.TotalSeconds > 0
+                    ? currentTime.TotalSeconds / TotalDuration.TotalSeconds
+                    : 0;
+
+                // 检查是否播放完成
+                if (currentTime >= TotalDuration)
+                {
+                    OnPlaybackCompleted();
+                }
             }
-
-            // 检查播放是否完成
-            if (remainingTime <= TimeSpan.Zero)
+            catch (Exception ex)
             {
-                OnPlaybackCompleted();
+                Console.WriteLine($"Error in UpdateProgress: {ex.Message}");
+            }
+            finally
+            {
+                _isUpdatingFromPlayback = false; // 结束更新状态
             }
         }
+
 
         private void OnPlaybackCompleted()
         {
