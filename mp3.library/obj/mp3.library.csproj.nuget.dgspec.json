@@ -49,6 +49,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Avalonia": {
+              "target": "Package",
+              "version": "[11.1.4, )"
+            },
             "CommunityToolkit.Mvvm": {
               "target": "Package",
               "version": "[8.3.2, )"

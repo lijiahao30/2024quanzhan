@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "Azb4eDLqBr8=",
+  "dgSpecHash": "DkDmeK1IqhA=",
   "success": true,
   "projectFilePath": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.library\\mp3.library.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\30753\\.nuget\\packages\\avalonia\\11.1.4\\avalonia.11.1.4.nupkg.sha512",
+    "C:\\Users\\30753\\.nuget\\packages\\avalonia.buildservices\\0.0.29\\avalonia.buildservices.0.0.29.nupkg.sha512",
+    "C:\\Users\\30753\\.nuget\\packages\\avalonia.remote.protocol\\11.1.4\\avalonia.remote.protocol.11.1.4.nupkg.sha512",
     "C:\\Users\\30753\\.nuget\\packages\\communitytoolkit.mvvm\\8.3.2\\communitytoolkit.mvvm.8.3.2.nupkg.sha512",
+    "C:\\Users\\30753\\.nuget\\packages\\microcom.runtime\\0.11.0\\microcom.runtime.0.11.0.nupkg.sha512",
     "C:\\Users\\30753\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\30753\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\30753\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",

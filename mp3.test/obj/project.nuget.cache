@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "agiPe8Yujis=",
+  "dgSpecHash": "YnvXUEpw2gs=",
   "success": true,
   "projectFilePath": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.test\\mp3.test.csproj",
   "expectedPackageFiles": [
@@ -43,6 +43,8 @@
     "C:\\Users\\30753\\.nuget\\packages\\irihi.avalonia.shared\\0.1.9\\irihi.avalonia.shared.0.1.9.nupkg.sha512",
     "C:\\Users\\30753\\.nuget\\packages\\irihi.ursa\\1.4.0\\irihi.ursa.1.4.0.nupkg.sha512",
     "C:\\Users\\30753\\.nuget\\packages\\irihi.ursa.themes.semi\\1.4.0\\irihi.ursa.themes.semi.1.4.0.nupkg.sha512",
+    "C:\\Users\\30753\\.nuget\\packages\\material.icons\\2.1.10\\material.icons.2.1.10.nupkg.sha512",
+    "C:\\Users\\30753\\.nuget\\packages\\material.icons.avalonia\\2.1.10\\material.icons.avalonia.2.1.10.nupkg.sha512",
     "C:\\Users\\30753\\.nuget\\packages\\microcom.runtime\\0.11.0\\microcom.runtime.0.11.0.nupkg.sha512",
     "C:\\Users\\30753\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
     "C:\\Users\\30753\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",

@@ -49,10 +49,7 @@ namespace mp3.library.Services
 
                 // 提取歌曲信息并返回
                 var song = songDetailResponse?.songs?.FirstOrDefault();
-                if (song != null)
-                {
-                    Console.WriteLine($"Successfully retrieved song details for ID {songId}: {song.name}");
-                }
+               
                 return song; // 返回包含详细信息的 Song 对象
             }
             catch (Exception ex)

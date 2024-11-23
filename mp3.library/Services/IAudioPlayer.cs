@@ -14,5 +14,8 @@ namespace mp3.library.Services
         /// 停止播放音频
         /// </summary>
         void Stop();
+        TimeSpan GetDuration(); // 获取音频总时长
+        TimeSpan GetCurrentTime(); // 获取当前播放时间
+        void Seek(TimeSpan position); // 设置播放位置
     }
 }

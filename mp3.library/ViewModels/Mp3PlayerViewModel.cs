@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using mp3.library.Models;
 
@@ -23,6 +24,35 @@ namespace mp3.library.ViewModels
         {
             get => _searchQuery;
             set => SetProperty(ref _searchQuery, value);
+        }
+        private double _currentProgress;
+        private TimeSpan _currentTime;
+        private TimeSpan _totalDuration;
+
+        public double CurrentProgress
+        {
+            get => _currentProgress;
+            set
+            {
+                if (SetProperty(ref _currentProgress, value))
+                {
+                    // 当用户拖动进度条时，同步调整播放位置
+                    var newPosition = TimeSpan.FromSeconds(value * TotalDuration.TotalSeconds);
+                    _audioPlayer.Seek(newPosition);
+                }
+            }
+        }
+
+        public TimeSpan CurrentTime
+        {
+            get => _currentTime;
+            set => SetProperty(ref _currentTime, value);
+        }
+
+        public TimeSpan TotalDuration
+        {
+            get => _totalDuration;
+            set => SetProperty(ref _totalDuration, value);
         }
 
         public ObservableCollection<Song> Songs { get; } = new();
@@ -118,6 +148,11 @@ namespace mp3.library.ViewModels
                 if (!string.IsNullOrWhiteSpace(url))
                 {
                     _audioPlayer.Play(url); // 播放歌曲
+                    // 获取总时长并更新属性
+                    TotalDuration = _audioPlayer.GetDuration();
+
+                    // 开启计时器，动态更新播放进度
+                    StartProgressTimer();
                 }
             }
             catch (Exception ex)
@@ -129,6 +164,52 @@ namespace mp3.library.ViewModels
                 IsPlaying = false;
             }*/
         }
+        private DispatcherTimer _progressTimer;
+
+        private void StartProgressTimer()
+        {
+            _progressTimer?.Stop();
+
+            _progressTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(5000) // 默认更新频率
+            };
+
+            _progressTimer.Tick += UpdateProgress;
+            _progressTimer.Start();
+        }
+
+        private void UpdateProgress(object sender, EventArgs args)
+        {
+            if (!IsPlaying) return;
+
+            CurrentTime = _audioPlayer.GetCurrentTime();
+            CurrentProgress = CurrentTime.TotalSeconds / TotalDuration.TotalSeconds;
+
+            var remainingTime = TotalDuration - CurrentTime;
+
+            // 动态调整更新频率
+            if (remainingTime.TotalSeconds < 10)
+            {
+                _progressTimer.Interval = TimeSpan.FromMilliseconds(200);
+            }
+
+            // 检查播放是否完成
+            if (remainingTime <= TimeSpan.Zero)
+            {
+                OnPlaybackCompleted();
+            }
+        }
+
+        private void OnPlaybackCompleted()
+        {
+            _progressTimer?.Stop();
+            IsPlaying = false;
+
+            // 播放下一首或其他逻辑
+            PlayNextSong();
+        }
+
 
         private void PlayPreviousSong()
         {
@@ -172,11 +253,7 @@ namespace mp3.library.ViewModels
                         {
                             song.album.picUrl = songDetails.album.picUrl; // 更新专辑图片 URL
                             song.AlbumImageBytes = await _imageService.DownloadImageAsync(song.album.picUrl);
-                            if (song.AlbumImageBytes != null && song.AlbumImageBytes.Length > 0) {
-                                Console.WriteLine($"Downloaded image for {song.name}, Size: {song.AlbumImageBytes.Length} bytes");
-                            } else {
-                                Console.WriteLine($"Failed to download image for {song.name}");
-                            }
+                          
                         }
                     }
                 }
@@ -290,6 +367,11 @@ namespace mp3.library.ViewModels
                 if (!string.IsNullOrWhiteSpace(url))
                 {
                     _audioPlayer.Play(url);
+                    // 获取总时长并更新属性
+                    TotalDuration = _audioPlayer.GetDuration();
+
+                    // 开启计时器，动态更新播放进度
+                    StartProgressTimer();
                 }
             }
             catch (Exception ex)

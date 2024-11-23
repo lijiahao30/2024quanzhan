@@ -6,8 +6,9 @@ C:\Users\30753\RiderProjects\mp3\mp3.library\obj\Debug\net8.0\mp3.library.Genera
 C:\Users\30753\RiderProjects\mp3\mp3.library\obj\Debug\net8.0\mp3.library.AssemblyInfoInputs.cache
 C:\Users\30753\RiderProjects\mp3\mp3.library\obj\Debug\net8.0\mp3.library.AssemblyInfo.cs
 C:\Users\30753\RiderProjects\mp3\mp3.library\obj\Debug\net8.0\mp3.library.csproj.CoreCompileInputs.cache
+C:\Users\30753\RiderProjects\mp3\mp3.library\obj\Debug\net8.0\mp3.library.sourcelink.json
 C:\Users\30753\RiderProjects\mp3\mp3.library\obj\Debug\net8.0\mp3.library.dll
 C:\Users\30753\RiderProjects\mp3\mp3.library\obj\Debug\net8.0\refint\mp3.library.dll
 C:\Users\30753\RiderProjects\mp3\mp3.library\obj\Debug\net8.0\mp3.library.pdb
 C:\Users\30753\RiderProjects\mp3\mp3.library\obj\Debug\net8.0\ref\mp3.library.dll
-C:\Users\30753\RiderProjects\mp3\mp3.library\obj\Debug\net8.0\mp3.library.sourcelink.json
+C:\Users\30753\RiderProjects\mp3\mp3.library\obj\Debug\net8.0\Avalonia\Resources.Inputs.cache

@@ -3,19 +3,29 @@
              x:Class="mp3.App"
              xmlns:local="clr-namespace:mp3;assembly=mp3"
              xmlns:converters="clr-namespace:mp3.Converters"
+             xmlns:material="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              RequestedThemeVariant="Default">
     <Application.DataTemplates>
         <local:ViewLocator />
     </Application.DataTemplates>
 
     <Application.Resources>
-               <ResourceDictionary>
-                    <local:ServiceLocator x:Key="ServiceLocator" />
-               </ResourceDictionary>
-           
+        <ResourceDictionary>
+            <!-- 注册 ServiceLocator -->
+            <local:ServiceLocator x:Key="ServiceLocator" />
+            <!-- 注册转换器 -->
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
-            
+        </ResourceDictionary>
     </Application.Resources>
+
+    <!-- 全局样式部分 -->
+    <Application.Styles>
+        <Style Selector="material|MaterialIcon">
+            <Setter Property="Foreground" Value="#3498DB" />
+            <Setter Property="Width" Value="24" />
+            <Setter Property="Height" Value="24" />
+        </Style>
+    </Application.Styles>
 
     <Application.Styles>
         <FluentTheme DensityStyle="Normal" />

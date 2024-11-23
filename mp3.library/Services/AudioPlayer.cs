@@ -10,13 +10,25 @@ namespace mp3.library.Services
 
         public void Play(string fileUrl)
         {
-            Stop(); // 停止任何正在播放的音频
-            Dispose(); // 清理资源
+            Stop();
+            Dispose();
 
             try
             {
-                _waveOut = new WaveOutEvent();
+                _waveOut = new WaveOutEvent
+                {
+                    DesiredLatency = 300, // 缓冲区延迟 300ms
+                    NumberOfBuffers = 3   // 缓冲区数量
+                };
+
                 _audioFileReader = new AudioFileReader(fileUrl);
+
+                // 监听播放停止事件
+                _waveOut.PlaybackStopped += (s, e) =>
+                {
+                    Console.WriteLine("Playback stopped.");
+                    Dispose(); // 自动释放资源
+                };
 
                 _waveOut.Init(_audioFileReader);
                 _waveOut.Play();
@@ -35,13 +47,50 @@ namespace mp3.library.Services
             }
         }
 
+        public TimeSpan GetDuration()
+        {
+            return _audioFileReader?.TotalTime ?? TimeSpan.Zero;
+        }
+
+        public TimeSpan GetCurrentTime()
+        {
+            return _audioFileReader?.CurrentTime ?? TimeSpan.Zero;
+        }
+
+        public void Seek(TimeSpan position)
+        {
+            if (_audioFileReader != null && position <= _audioFileReader.TotalTime)
+            {
+                _audioFileReader.CurrentTime = position;
+            }
+        }
+
+        public float Volume
+        {
+            get => _audioFileReader?.Volume ?? 1.0f;
+            set
+            {
+                if (_audioFileReader != null)
+                {
+                    _audioFileReader.Volume = value;
+                }
+            }
+        }
+
         public void Dispose()
         {
-            _audioFileReader?.Dispose();
-            _audioFileReader = null;
+            if (_waveOut != null)
+            {
+                _waveOut.Stop();
+                _waveOut.Dispose();
+                _waveOut = null;
+            }
 
-            _waveOut?.Dispose();
-            _waveOut = null;
+            if (_audioFileReader != null)
+            {
+                _audioFileReader.Dispose();
+                _audioFileReader = null;
+            }
         }
     }
 }

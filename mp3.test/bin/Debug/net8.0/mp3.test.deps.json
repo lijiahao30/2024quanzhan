@@ -190,6 +190,19 @@
           }
         }
       },
+      "Avalonia.ReactiveUI/11.1.4": {
+        "dependencies": {
+          "Avalonia": "11.1.4",
+          "ReactiveUI": "18.3.1",
+          "System.Reactive": "6.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/Avalonia.ReactiveUI.dll": {
+            "assemblyVersion": "11.1.4.0",
+            "fileVersion": "11.1.4.0"
+          }
+        }
+      },
       "Avalonia.Remote.Protocol/11.1.4": {
         "runtime": {
           "lib/net8.0/Avalonia.Remote.Protocol.dll": {
@@ -399,6 +412,17 @@
         }
       },
       "coverlet.collector/6.0.0": {},
+      "DynamicData/7.9.5": {
+        "dependencies": {
+          "System.Reactive": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/DynamicData.dll": {
+            "assemblyVersion": "7.9.0.0",
+            "fileVersion": "7.9.5.54039"
+          }
+        }
+      },
       "HarfBuzzSharp/7.3.0.2": {
         "dependencies": {
           "HarfBuzzSharp.NativeAssets.Win32": "7.3.0.2",
@@ -499,6 +523,26 @@
           "lib/netstandard2.0/Ursa.Themes.Semi.dll": {
             "assemblyVersion": "1.4.0.0",
             "fileVersion": "1.4.0.0"
+          }
+        }
+      },
+      "Material.Icons/2.1.10": {
+        "runtime": {
+          "lib/netstandard2.0/Material.Icons.dll": {
+            "assemblyVersion": "2.1.10.0",
+            "fileVersion": "2.1.10.0"
+          }
+        }
+      },
+      "Material.Icons.Avalonia/2.1.10": {
+        "dependencies": {
+          "Avalonia": "11.1.4",
+          "Material.Icons": "2.1.10"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Material.Icons.Avalonia.dll": {
+            "assemblyVersion": "2.1.10.0",
+            "fileVersion": "2.1.10.0"
           }
         }
       },
@@ -1101,6 +1145,18 @@
           }
         }
       },
+      "ReactiveUI/18.3.1": {
+        "dependencies": {
+          "DynamicData": "7.9.5",
+          "Splat": "14.4.1"
+        },
+        "runtime": {
+          "lib/net6.0/ReactiveUI.dll": {
+            "assemblyVersion": "18.3.0.0",
+            "fileVersion": "18.3.1.49589"
+          }
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
       "runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
       "runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
@@ -1219,6 +1275,14 @@
             "rid": "win-x86",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Splat/14.4.1": {
+        "runtime": {
+          "lib/net6.0/Splat.dll": {
+            "assemblyVersion": "14.4.0.0",
+            "fileVersion": "14.4.1.53869"
           }
         }
       },
@@ -1709,12 +1773,14 @@
           "Avalonia.Desktop": "11.1.4",
           "Avalonia.Diagnostics": "11.1.4",
           "Avalonia.Fonts.Inter": "11.1.4",
+          "Avalonia.ReactiveUI": "11.1.4",
           "Avalonia.Themes.Fluent": "11.1.4",
           "Avalonia.Xaml.Behaviors": "11.1.0.4",
           "AvaloniaInfiniteScrolling.Control": "1.0.0",
           "CommunityToolkit.Mvvm": "8.4.0-preview2",
           "Irihi.Ursa": "1.4.0",
           "Irihi.Ursa.Themes.Semi": "1.4.0",
+          "Material.Icons.Avalonia": "2.1.10",
           "Microsoft.Extensions.DependencyInjection": "8.0.0",
           "Microsoft.Extensions.Http": "8.0.0",
           "Projektanker.Icons.Avalonia.FontAwesome": "9.4.1",
@@ -1820,6 +1886,13 @@
       "sha512": "sha512-O7OP5aBq18bLkDA/0LWPIcHPSM2Ja8xDk0s0hetEzB/985pya1ffv3BU7C04gbB7pGsj6gvROGBcTI62Pw59Sw==",
       "path": "avalonia.native/11.1.4",
       "hashPath": "avalonia.native.11.1.4.nupkg.sha512"
+    },
+    "Avalonia.ReactiveUI/11.1.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vGtbdBTPDvF/cJWMFN0V4Smp6YggAL2U2TSVFJfhr2PlOnIPOMEt2JPw9kYcbAlT4JZu5yFKds7tJRbQZK7d1w==",
+      "path": "avalonia.reactiveui/11.1.4",
+      "hashPath": "avalonia.reactiveui.11.1.4.nupkg.sha512"
     },
     "Avalonia.Remote.Protocol/11.1.4": {
       "type": "package",
@@ -1954,6 +2027,13 @@
       "path": "coverlet.collector/6.0.0",
       "hashPath": "coverlet.collector.6.0.0.nupkg.sha512"
     },
+    "DynamicData/7.9.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xFwVha7o3qUtVYxco5p+7Urcztc/m1gmaEUxOG0i7LNe+vfCfyb0ECAsT2FLm3zOPHb0g8s9qVu5LfPKfRNVng==",
+      "path": "dynamicdata/7.9.5",
+      "hashPath": "dynamicdata.7.9.5.nupkg.sha512"
+    },
     "HarfBuzzSharp/7.3.0.2": {
       "type": "package",
       "serviceable": true,
@@ -2009,6 +2089,20 @@
       "sha512": "sha512-3wgVbCEdLF3G0ESyMxCVvQ2v+3dzYVhmTsT7EYRpR7vRJwm2+u/bbaOufygig7L4i7LfEgyli+iyH52XuAjlWQ==",
       "path": "irihi.ursa.themes.semi/1.4.0",
       "hashPath": "irihi.ursa.themes.semi.1.4.0.nupkg.sha512"
+    },
+    "Material.Icons/2.1.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nQnLAoVb9lgxWd4OtDADPVzBxERB9UYQd0UWcrqjg0NKFf8oPMuDM2kkxpBKe/Wm6Ayx3C/t3j2+8R1Nscg0Kw==",
+      "path": "material.icons/2.1.10",
+      "hashPath": "material.icons.2.1.10.nupkg.sha512"
+    },
+    "Material.Icons.Avalonia/2.1.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dclTtNbnoLonYK/YI2vgYvOmLeqw08xHxL+ExOSGZEMJKt6k3F6SDmJ41tByOxgXAd+nIDh8V9FqC0FQSEp/CQ==",
+      "path": "material.icons.avalonia/2.1.10",
+      "hashPath": "material.icons.avalonia.2.1.10.nupkg.sha512"
     },
     "MicroCom.Runtime/0.11.0": {
       "type": "package",
@@ -2276,6 +2370,13 @@
       "path": "projektanker.icons.avalonia.fontawesome/9.4.1",
       "hashPath": "projektanker.icons.avalonia.fontawesome.9.4.1.nupkg.sha512"
     },
+    "ReactiveUI/18.3.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0tclGtjrRPfA2gbjiM7O3DeNmo6/TpDn7CMN6jgzDrbgrnysM7oEzjGEeXbtXaOxH6kEf6RiMKWobZoSgbBXhQ==",
+      "path": "reactiveui/18.3.1",
+      "hashPath": "reactiveui.18.3.1.nupkg.sha512"
+    },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
       "type": "package",
       "serviceable": true,
@@ -2422,6 +2523,13 @@
       "sha512": "sha512-O9QXoWEXA+6cweR4h3BOnwMz+pO9vL9mXdjLrpDd0w1QzCgWmLQBxa1VgySDITiH7nQndrDG1h6937zm9pLj1Q==",
       "path": "skiasharp.nativeassets.win32/2.88.8",
       "hashPath": "skiasharp.nativeassets.win32.2.88.8.nupkg.sha512"
+    },
+    "Splat/14.4.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Z1Mncnzm9pNIaIbZ/EWH6x5ESnKsmAvu8HP4StBRw+yhz0lzE7LCbt22TNTPaFrYLYbYCbGQIc/61yuSnpLidg==",
+      "path": "splat/14.4.1",
+      "hashPath": "splat.14.4.1.nupkg.sha512"
     },
     "System.Collections/4.3.0": {
       "type": "package",

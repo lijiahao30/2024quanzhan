@@ -4,95 +4,113 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactions;assembly=Avalonia.Xaml.Interactions"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:material="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+
              mc:Ignorable="d"
              x:Class="mp3.Views.Mp3PlayerView"
              xmlns:local="clr-namespace:mp3"
              xmlns:lc="using:mp3.Converters"
-             Width="600" Height="400"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
              DataContext="{Binding Mp3PlayerViewModel , Source={StaticResource ServiceLocator}}">
     <UserControl.Resources>
-      
-        <lc:ByteArrayToBitmapConverter x:Key="ByteArrayToBitmapConverter"></lc:ByteArrayToBitmapConverter>
+        <lc:ByteArrayToBitmapConverter x:Key="ByteArrayToBitmapConverter" />
     </UserControl.Resources>
 
-    <Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Initialized">
-            <ia:InvokeCommandAction Command="{Binding OnInitializedCommand}"/>
-        </ia:EventTriggerBehavior>
-    </Interaction.Behaviors>
-    
-    <Grid Background="LightGray" RowDefinitions="Auto, *, Auto" Margin="10">
+    <Grid Background="#F5F5F5" RowDefinitions="Auto, *, Auto" Margin="10">
 
         <!-- 搜索区域 -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" >
-            <TextBox Width="400" Margin="0,0,10,0"
-                     Watermark="请输入歌曲名称..." 
-                     Text="{Binding SearchQuery}" />
-            <Button Margin="8,4,4,0" Content="搜索" Command="{Binding SearchCommand}"/>
+        <Border Grid.Row="0" Padding="10" Background="#FFFFFF" CornerRadius="10" Margin="0,0,0,10" BoxShadow="0 2 4 #D3D3D3">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Spacing="10">
+                <TextBox Width="400" 
+                         Watermark="请输入歌曲名称..." 
+                         Text="{Binding SearchQuery}" 
+                         Background="#F5F5F5" 
+                         CornerRadius="5" />
+                <Button Content="搜索" 
+                        Command="{Binding SearchCommand}" 
+                        Background="#3498DB" 
+                        Foreground="White" 
+                        Padding="10,5" 
+                        CornerRadius="5" />
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1">
+            <ListBox ItemsSource="{Binding Songs}" 
+                     SelectedItem="{Binding SelectedSong, Mode=TwoWay}" 
+                     Margin="10" BorderThickness="0" Background="Transparent">
+                <Interaction.Behaviors>
+                    <ia:EventTriggerBehavior EventName="SelectionChanged">
+                        <ia:InvokeCommandAction Command="{Binding SelectedSongChangedCommand}" />
+                    </ia:EventTriggerBehavior>
+                </Interaction.Behaviors>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#FFFFFF" 
+                                CornerRadius="10" 
+                                Margin="5" 
+                                Padding="10" 
+                                BoxShadow="0 2 4 #D3D3D3">
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Image Source="{Binding AlbumImageBytes, Converter={StaticResource ByteArrayToBitmapConverter}}" 
+                                       Width="50" 
+                                       Height="50" 
+                                       Stretch="UniformToFill" />
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding name}" 
+                                               FontWeight="Bold" 
+                                               FontSize="16" 
+                                               Foreground="#333" />
+                                    <TextBlock Text="{Binding artists[0].name}" 
+                                               Foreground="#888" 
+                                               FontSize="14" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
 
 
-        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" Spacing="10" Margin="10">
 
+            <!-- 播放控制按钮 -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
+                <Button Width="50" Height="50" Command="{Binding PlayPreviousCommand}" Background="#3498DB" CornerRadius="25">
+                    <Image Source="/Assets/Icons/previous.png" Width="24" Height="24" />
+                </Button>
 
-        <!-- 歌曲列表 -->
-        <ListBox Grid.Row="1" ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedSong}">
-            <Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="SelectionChanged">
-                    <ia:InvokeCommandAction Command="{Binding SelectedSongChangedCommand}" />
-                </ia:EventTriggerBehavior>
-            </Interaction.Behaviors>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Image Source="{Binding AlbumImageBytes, Converter={StaticResource ByteArrayToBitmapConverter}}" 
-                               Width="50" Height="50" Margin="5" />
+                <Button Width="50" Height="50" Command="{Binding PlayCommand}" IsVisible="{Binding IsPlaying, Converter={StaticResource InverseBooleanConverter}}" Background="#3498DB" CornerRadius="25">
+                    <Image Source="/Assets/Icons/play.png" Width="24" Height="24" />
+                </Button>
 
-                        <StackPanel>
-                            <TextBlock Text="{Binding name}" FontWeight="Bold" />
-                            <TextBlock Text="{Binding artists[0].name}" Foreground="Gray" />
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                <Button Width="50" Height="50" Command="{Binding StopCommand}" IsVisible="{Binding IsPlaying}" Background="#E74C3C" CornerRadius="25">
+                    <Image Source="/Assets/Icons/stop.png" Width="24" Height="24" />
+                </Button>
 
+                <Button Width="50" Height="50" Command="{Binding PlayNextCommand}" Background="#3498DB" CornerRadius="25">
+                    <Image Source="/Assets/Icons/next.png" Width="24" Height="24" />
+                </Button>
+            </StackPanel>
 
+            <!-- 进度条和时间 -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+                <!-- 当前时间 -->
+                <TextBlock Text="{Binding CurrentTime, StringFormat=mm\\:ss}" FontSize="14" Foreground="#333" />
+        
+                <Slider Width="300" Minimum="0" Maximum="1" 
+                        Value="{Binding CurrentProgress, Mode=TwoWay}" />
 
-
-        <!-- 控制区域 -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-            <Button Width="100" Command="{Binding PlayPreviousCommand}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Image Source="/Assets/Icons/previous.png" Width="16" Height="16" Margin="0,0,5,0" />
-                    <TextBlock VerticalAlignment="Center" />
-                </StackPanel>
-            </Button>
-
-            <!-- 播放按钮 -->
-            <Button Width="100" Command="{Binding PlayCommand}" IsVisible="{Binding IsPlaying, Converter={StaticResource InverseBooleanConverter}}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Image Source="/Assets/Icons/play.png" Width="16" Height="16" Margin="0,0,5,0" />
-                    <TextBlock  VerticalAlignment="Center" />
-                </StackPanel>
-            </Button>
-
-            <!-- 停止按钮 -->
-            <Button Width="100" Command="{Binding StopCommand}" IsVisible="{Binding IsPlaying}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Image Source="/Assets/Icons/stop.png" Width="16" Height="16" Margin="0,0,5,0" />
-                    <TextBlock  VerticalAlignment="Center" />
-                </StackPanel>
-            </Button>
-            <Button Width="100" Command="{Binding PlayNextCommand}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Image Source="/Assets/Icons/next.png" Width="16" Height="16" Margin="0,0,5,0" />
-                    <TextBlock VerticalAlignment="Center" />
-                </StackPanel>
-            </Button>
-
-        </StackPanel>
 
         
+                <!-- 总时长 -->
+                <TextBlock Text="{Binding TotalDuration, StringFormat=mm\\:ss}" FontSize="14" Foreground="#333" />
+            </StackPanel>
+
+        </StackPanel>
+
+
     </Grid>
-    
 </UserControl>
