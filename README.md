@@ -87,4 +87,4 @@
 1. 克隆项目代码：
    ```bash
    git clone https://github.com/your-repo/diary-app.git
-   cd diary-app
+   cd mp3
