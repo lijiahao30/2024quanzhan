@@ -11,7 +11,7 @@
              xmlns:local="clr-namespace:mp3"
              xmlns:lc="using:mp3.Converters"
              d:DesignWidth="800"
-             d:DesignHeight="450"
+             d:DesignHeight="500"
              DataContext="{Binding Mp3PlayerViewModel , Source={StaticResource ServiceLocator}}">
     <UserControl.Resources>
         <lc:ByteArrayToBitmapConverter x:Key="ByteArrayToBitmapConverter" />
@@ -74,10 +74,10 @@
         </ScrollViewer>
 
 
-        <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" Spacing="10" Margin="10">
+        <StackPanel Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="30" >
 
             <!-- 播放控制按钮 -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="10">
                 <Button Width="50" Height="50" Command="{Binding PlayPreviousCommand}" Background="#3498DB" CornerRadius="25">
                     <Image Source="/Assets/Icons/previous.png" Width="24" Height="24" />
                 </Button>
@@ -89,14 +89,13 @@
                 <Button Width="50" Height="50" Command="{Binding StopCommand}" IsVisible="{Binding IsPlaying}" Background="#E74C3C" CornerRadius="25">
                     <Image Source="/Assets/Icons/stop.png" Width="24" Height="24" />
                 </Button>
-
                 <Button Width="50" Height="50" Command="{Binding PlayNextCommand}" Background="#3498DB" CornerRadius="25">
                     <Image Source="/Assets/Icons/next.png" Width="24" Height="24" />
                 </Button>
             </StackPanel>
 
             <!-- 进度条和时间 -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
                 <!-- 当前时间 -->
                 <TextBlock Text="{Binding CurrentTime, StringFormat=mm\\:ss}" FontSize="14" Foreground="#333" />
         
