@@ -9,7 +9,8 @@ namespace mp3.library.Services
         /// </summary>
         /// <param name="fileUrl">音频文件的 URL 或本地路径</param>
         void Play(string fileUrl);
-
+        void Pause(); // 新增
+        void Resume(); // 新增
         /// <summary>
         /// 停止播放音频
         /// </summary>

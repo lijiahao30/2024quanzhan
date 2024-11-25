@@ -7,9 +7,17 @@ namespace mp3.library.Services
     {
         private IWavePlayer _waveOut;
         private AudioFileReader _audioFileReader;
+        private bool _isPaused; // 用于标记当前是否为暂停状态
 
         public void Play(string fileUrl)
         {
+            if (_isPaused && _waveOut != null && _audioFileReader != null)
+            {
+                // 如果当前是暂停状态，调用 Resume 方法
+                Resume();
+                return;
+            }
+
             Stop();
             Dispose();
 
@@ -32,6 +40,7 @@ namespace mp3.library.Services
 
                 _waveOut.Init(_audioFileReader);
                 _waveOut.Play();
+                _isPaused = false; // 标记为非暂停状态
             }
             catch (Exception ex)
             {
@@ -39,11 +48,30 @@ namespace mp3.library.Services
             }
         }
 
-        public void Stop()
+        public void Pause()
         {
             if (_waveOut != null && _waveOut.PlaybackState == PlaybackState.Playing)
             {
+                _waveOut.Pause();
+                _isPaused = true; // 标记为暂停状态
+            }
+        }
+
+        public void Resume()
+        {
+            if (_waveOut != null && _waveOut.PlaybackState == PlaybackState.Paused)
+            {
+                _waveOut.Play();
+                _isPaused = false; // 标记为非暂停状态
+            }
+        }
+
+        public void Stop()
+        {
+            if (_waveOut != null && (_waveOut.PlaybackState == PlaybackState.Playing || _waveOut.PlaybackState == PlaybackState.Paused))
+            {
                 _waveOut.Stop();
+                _isPaused = false; // 停止时清除暂停状态
             }
         }
 
@@ -91,6 +119,8 @@ namespace mp3.library.Services
                 _audioFileReader.Dispose();
                 _audioFileReader = null;
             }
+
+            _isPaused = false; // 重置暂停状态
         }
     }
 }

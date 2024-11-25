@@ -74,8 +74,7 @@
         </ScrollViewer>
 
 
-        <StackPanel Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="30" >
-
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="30">
             <!-- 播放控制按钮 -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="10">
                 <Button Width="50" Height="50" Command="{Binding PlayPreviousCommand}" Background="#3498DB" CornerRadius="25">
@@ -89,23 +88,24 @@
                 <Button Width="50" Height="50" Command="{Binding StopCommand}" IsVisible="{Binding IsPlaying}" Background="#E74C3C" CornerRadius="25">
                     <Image Source="/Assets/Icons/stop.png" Width="24" Height="24" />
                 </Button>
+
                 <Button Width="50" Height="50" Command="{Binding PlayNextCommand}" Background="#3498DB" CornerRadius="25">
                     <Image Source="/Assets/Icons/next.png" Width="24" Height="24" />
                 </Button>
             </StackPanel>
 
             <!-- 进度条和时间 -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
+            <Grid Width="400" HorizontalAlignment="Center" VerticalAlignment="Center" ColumnDefinitions="Auto, *, Auto">
                 <!-- 当前时间 -->
-                <TextBlock Text="{Binding CurrentTime, StringFormat=mm\\:ss}" FontSize="14" Foreground="#333" />
-        
-                <Slider Width="300" Minimum="0" Maximum="1" 
-                        Value="{Binding CurrentProgress, Mode=TwoWay}" />
-        
-                <!-- 总时长 -->
-                <TextBlock Text="{Binding TotalDuration, StringFormat=mm\\:ss}" FontSize="14" Foreground="#333" />
-            </StackPanel>
+                <TextBlock Grid.Column="0" Text="{Binding CurrentTime, StringFormat=mm\\:ss}" FontSize="14" Foreground="#333" Width="50" TextAlignment="Right" />
 
+                <!-- 进度条 -->
+                <Slider Grid.Column="1" Width="300" Minimum="0" Maximum="1" 
+                        Value="{Binding CurrentProgress, Mode=TwoWay}" Margin="10,0" />
+
+                <!-- 总时长 -->
+                <TextBlock Grid.Column="2" Text="{Binding TotalDuration, StringFormat=mm\\:ss}" FontSize="14" Foreground="#333" Width="50" TextAlignment="Left" />
+            </Grid>
         </StackPanel>
 
 
