@@ -31,6 +31,7 @@ namespace mp3.library.ViewModels
         if (IsPlaying && !_isPaused && _audioPlayer.GetCurrentTime() > TimeSpan.Zero)
         {
             // 暂停播放
+            StopRotation();
             _audioPlayer.Pause();
             IsPlaying = false;
             _isPaused = true;
@@ -42,6 +43,7 @@ namespace mp3.library.ViewModels
         {
             // 恢复播放
             _audioPlayer.Resume();
+            StartRotation();
             IsPlaying = true;
             _isPaused = false;
             return;
@@ -52,13 +54,14 @@ namespace mp3.library.ViewModels
         {
             // 停止当前播放，清理状态
             StopPlayback();
-
+            StopRotation();
             // 获取歌曲播放 URL
             var url = await _musicService.GetSongUrlAsync(SelectedSong.id);
             if (string.IsNullOrWhiteSpace(url)) return;
 
             // 播放新歌曲
             _audioPlayer.Play(url);
+            StartRotation();
             IsPlaying = true;
             _isPaused = false;
 
@@ -128,6 +131,37 @@ namespace mp3.library.ViewModels
         get => _isSearching;
         set => SetProperty(ref _isSearching, value);
     }
+    private double _rotateAngle;
+    public double RotateAngle
+    {
+        get => _rotateAngle;
+        set => SetProperty(ref _rotateAngle, value);
+    }
+
+    private DispatcherTimer _rotationTimer;
+
+    private void StartRotation()
+    {
+        if (_rotationTimer == null)
+        {
+            _rotationTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(30) // 每 30ms 更新一次
+            };
+
+            _rotationTimer.Tick += (s, e) =>
+            {
+                RotateAngle = (RotateAngle + 3) % 360; // 每次增加 3 度，形成平滑旋转
+            };
+        }
+
+        _rotationTimer.Start();
+    }
+
+    private void StopRotation()
+    {
+        _rotationTimer?.Stop();
+    }
 
     private bool _isPlaying;
     public bool IsPlaying
@@ -162,18 +196,21 @@ namespace mp3.library.ViewModels
                 // 如果是暂停状态，继续播放
                 _audioPlayer.Resume();
                 _isPaused = false;
+                StartRotation(); // 启动旋转
             }
             else
             {
                 // 如果正在播放，暂停
                 _audioPlayer.Pause();
                 _isPaused = true;
+                StopRotation(); // 停止旋转
             }
         }
         else
         {
             // 如果没有播放，开始播放选中的歌曲
             _ = PlaySongAsync();
+            StartRotation(); // 启动旋转
         }
 
         // 更新 UI 状态
@@ -182,16 +219,13 @@ namespace mp3.library.ViewModels
     private DispatcherTimer _progressTimer;
     private void StopPlayback()
     {
-        _audioPlayer.Stop();
+        _audioPlayer.Pause();
         IsPlaying = false;
         _isPaused = false;
-
+        // 停止旋转
+        StopRotation();
         // 停止计时器
         _progressTimer?.Stop();
-
-        // 重置进度
-        CurrentTime = TimeSpan.Zero;
-        CurrentProgress = 0;
     }
 
     private async Task PlaySongAsync()
@@ -199,6 +233,7 @@ namespace mp3.library.ViewModels
         if (SelectedSong == null) return;
 
         StopPlayback(); // 停止当前播放
+        StopRotation();
 
         try
         {
@@ -206,6 +241,7 @@ namespace mp3.library.ViewModels
             if (string.IsNullOrWhiteSpace(url)) return;
 
             _audioPlayer.Play(url);
+            StartRotation();
             IsPlaying = true;
             _isPaused = false;
 

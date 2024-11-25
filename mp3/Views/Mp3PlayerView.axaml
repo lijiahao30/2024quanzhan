@@ -74,7 +74,20 @@
         </ScrollViewer>
 
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="30">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="30" Height="70">
+            <!-- 当前播放歌曲的图片 -->
+            <Border Width="60" Height="60" CornerRadius="30" Background="#F5F5F5" Margin="0,0,20,0" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="True">
+                <Image Source="{Binding SelectedSong.AlbumImageBytes, Converter={StaticResource ByteArrayToBitmapConverter}}" 
+                       Stretch="UniformToFill">
+                    <Image.RenderTransform>
+                        <!-- 设置旋转中心点为控件的中心 -->
+                        <RotateTransform Angle="{Binding RotateAngle}" CenterX="0" CenterY="0" />
+                    </Image.RenderTransform>
+                </Image>
+            </Border>
+
+
             <!-- 播放控制按钮 -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="10">
                 <Button Width="50" Height="50" Command="{Binding PlayPreviousCommand}" Background="#3498DB" CornerRadius="25">
@@ -84,7 +97,7 @@
                 <Button Width="50" Height="50" Command="{Binding PlayCommand}" IsVisible="{Binding IsPlaying, Converter={StaticResource InverseBooleanConverter}}" Background="#3498DB" CornerRadius="25">
                     <Image Source="/Assets/Icons/play.png" Width="24" Height="24" />
                 </Button>
-
+    
                 <Button Width="50" Height="50" Command="{Binding StopCommand}" IsVisible="{Binding IsPlaying}" Background="#E74C3C" CornerRadius="25">
                     <Image Source="/Assets/Icons/stop.png" Width="24" Height="24" />
                 </Button>
