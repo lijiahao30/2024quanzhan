@@ -92,10 +92,13 @@ public class MenuItem {
 
     private static MenuItem Mp3PlayerView =>
         new() { Name = "今日推荐歌曲", View = MenuNavigationConstant.Mp3PlayerView };
+    
+    private static MenuItem DiaryView =>
+        new() { Name = "写日记", View = MenuNavigationConstant.DiaryView };
 
    
 
     public static IEnumerable<MenuItem> MenuItems { get; } = [
-        Mp3PlayerView
+        Mp3PlayerView,DiaryView
     ];
 }

@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:mp3;assembly=mp3"
              xmlns:converters="clr-namespace:mp3.Converters"
              xmlns:material="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:semi="https://irihi.tech/semi"
+             xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
              RequestedThemeVariant="Default">
     <Application.DataTemplates>
         <local:ViewLocator />
@@ -29,5 +31,10 @@
 
     <Application.Styles>
         <FluentTheme DensityStyle="Normal" />
+    </Application.Styles>
+    
+    <Application.Styles>
+        <semi:SemiTheme Locale="zh-CN" />
+        <u-semi:SemiTheme Locale="zh-CN"/>
     </Application.Styles>
 </Application>
