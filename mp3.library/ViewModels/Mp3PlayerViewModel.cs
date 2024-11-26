@@ -16,6 +16,7 @@ namespace mp3.library.ViewModels
     private readonly IMusicService _musicService;
     private readonly IAudioPlayer _audioPlayer;
     private readonly ImageService _imageService;
+    private readonly IAlertService _alertService;
     public ICommand SelectedSongChangedCommand { get; }
     private string _searchQuery;
     public string SearchQuery
@@ -124,7 +125,41 @@ namespace mp3.library.ViewModels
     public ICommand StopCommand { get; }
     public ICommand PlayNextCommand { get; }
     public ICommand PlayPreviousCommand { get; }
+    private ICommand OnInitializedCommand { get; }
+    public async Task InitializeAsync()
+    {
+        try
+        {
+            // 初始化时根据“今日推荐”搜索获取歌曲数据
+            var searchQuery = "今日推荐"; // 这里可以根据你的需求动态设置搜索词
+            var songs = await _musicService.SearchMusicAsync(searchQuery);
 
+            if (songs != null && songs.Any())
+            {
+                // 将推荐的歌曲添加到 Songs 集合中
+                Songs.Clear();
+                foreach (var song in songs)
+                {
+                    Songs.Add(song);
+                    var songDetails = await _musicService.GetSongDetailAsync(song.id);
+                    if (songDetails != null)
+                    {
+                        song.album.picUrl = songDetails.album.picUrl;
+                        song.AlbumImageBytes = await _imageService.DownloadImageAsync(song.album.picUrl);
+                    }
+                }
+            }
+            else
+            {
+                await _alertService.AlertAsync("初始化失败", "加载数据时出现问题，请稍后重试。");
+            }
+        }
+        catch (Exception ex)
+        {
+            // 异常提示
+            await _alertService.AlertAsync("错误", $"发生错误: {ex.Message}");
+        }
+    }
     private bool _isSearching;
     public bool IsSearching
     {
@@ -185,6 +220,8 @@ namespace mp3.library.ViewModels
         PlayNextCommand = new RelayCommand(PlayNextSong);
         PlayPreviousCommand = new RelayCommand(PlayPreviousSong);
         SelectedSongChangedCommand = new AsyncRelayCommand(PlaySelectedSong);
+        OnInitializedCommand = new AsyncRelayCommand(InitializeAsync);
+
     }
 
     private void TogglePlayPause()

@@ -16,7 +16,11 @@
     <UserControl.Resources>
         <lc:ByteArrayToBitmapConverter x:Key="ByteArrayToBitmapConverter" />
     </UserControl.Resources>
-
+    <Interaction.Behaviors>
+        <ia:EventTriggerBehavior EventName="Initialized">
+            <ia:InvokeCommandAction Command="{Binding OnInitializedCommand}"></ia:InvokeCommandAction>
+        </ia:EventTriggerBehavior>
+    </Interaction.Behaviors>
     <Grid Background="#F5F5F5" RowDefinitions="Auto, *, Auto" Margin="10">
 
         <!-- 搜索区域 -->

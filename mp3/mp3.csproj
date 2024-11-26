@@ -49,6 +49,7 @@
     <ItemGroup>
       <AvaloniaXaml Remove="Views\Window1.axaml" />
       <AvaloniaXaml Remove="Views\mp3.axaml" />
+      <AvaloniaXaml Remove="Views\EditDiaryView.axaml" />
     </ItemGroup>
 
     <ItemGroup>
@@ -56,5 +57,7 @@
       <Compile Remove="Views\mp3.axaml.cs" />
       <Compile Remove="ViewModels\ViewModelBase.cs" />
       <Compile Remove="ViewModels\MainWindowViewModel.cs" />
+      <Compile Remove="Views\DiaryView.axaml.cs" />
+      <Compile Remove="Views\EditDiaryView.axaml.cs" />
     </ItemGroup>
 </Project>
