@@ -16,21 +16,27 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = mp3
-build_property.ProjectDir = C:\Users\30753\RiderProjects\mp3\mp3\
+build_property.ProjectDir = D:\_Project\2024quanzhan\mp3\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 
-[C:/Users/30753/RiderProjects/mp3/mp3/App.axaml]
+[D:/_Project/2024quanzhan/mp3/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/30753/RiderProjects/mp3/mp3/Views/InitializationView.axaml]
+[D:/_Project/2024quanzhan/mp3/Views/DiaryView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/30753/RiderProjects/mp3/mp3/Views/MainView.axaml]
+[D:/_Project/2024quanzhan/mp3/Views/EditDiaryView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/30753/RiderProjects/mp3/mp3/Views/MainWindow.axaml]
+[D:/_Project/2024quanzhan/mp3/Views/InitializationView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/30753/RiderProjects/mp3/mp3/Views/Mp3PlayerView.axaml]
+[D:/_Project/2024quanzhan/mp3/Views/MainView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/_Project/2024quanzhan/mp3/Views/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/_Project/2024quanzhan/mp3/Views/Mp3PlayerView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.test\\mp3.test.csproj": {}
+    "D:\\_Project\\2024quanzhan\\mp3.test\\mp3.test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.library\\mp3.library.csproj": {
+    "D:\\_Project\\2024quanzhan\\mp3.library\\mp3.library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.library\\mp3.library.csproj",
+        "projectUniqueName": "D:\\_Project\\2024quanzhan\\mp3.library\\mp3.library.csproj",
         "projectName": "mp3.library",
-        "projectPath": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.library\\mp3.library.csproj",
-        "packagesPath": "C:\\Users\\30753\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.library\\obj\\",
+        "projectPath": "D:\\_Project\\2024quanzhan\\mp3.library\\mp3.library.csproj",
+        "packagesPath": "C:\\Users\\zhoufengming\\.nuget\\packages\\",
+        "outputPath": "D:\\_Project\\2024quanzhan\\mp3.library\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\30753\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\zhoufengming\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -94,39 +88,33 @@
         }
       }
     },
-    "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.test\\mp3.test.csproj": {
+    "D:\\_Project\\2024quanzhan\\mp3.test\\mp3.test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.test\\mp3.test.csproj",
+        "projectUniqueName": "D:\\_Project\\2024quanzhan\\mp3.test\\mp3.test.csproj",
         "projectName": "mp3.test",
-        "projectPath": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.test\\mp3.test.csproj",
-        "packagesPath": "C:\\Users\\30753\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.test\\obj\\",
+        "projectPath": "D:\\_Project\\2024quanzhan\\mp3.test\\mp3.test.csproj",
+        "packagesPath": "C:\\Users\\zhoufengming\\.nuget\\packages\\",
+        "outputPath": "D:\\_Project\\2024quanzhan\\mp3.test\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\30753\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\zhoufengming\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.library\\mp3.library.csproj": {
-                "projectPath": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.library\\mp3.library.csproj"
+              "D:\\_Project\\2024quanzhan\\mp3.library\\mp3.library.csproj": {
+                "projectPath": "D:\\_Project\\2024quanzhan\\mp3.library\\mp3.library.csproj"
               },
-              "C:\\Users\\30753\\RiderProjects\\mp3\\mp3\\mp3.csproj": {
-                "projectPath": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3\\mp3.csproj"
+              "D:\\_Project\\2024quanzhan\\mp3\\mp3.csproj": {
+                "projectPath": "D:\\_Project\\2024quanzhan\\mp3\\mp3.csproj"
               }
             }
           }
@@ -199,36 +187,30 @@
         }
       }
     },
-    "C:\\Users\\30753\\RiderProjects\\mp3\\mp3\\mp3.csproj": {
+    "D:\\_Project\\2024quanzhan\\mp3\\mp3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3\\mp3.csproj",
+        "projectUniqueName": "D:\\_Project\\2024quanzhan\\mp3\\mp3.csproj",
         "projectName": "mp3",
-        "projectPath": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3\\mp3.csproj",
-        "packagesPath": "C:\\Users\\30753\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3\\obj\\",
+        "projectPath": "D:\\_Project\\2024quanzhan\\mp3\\mp3.csproj",
+        "packagesPath": "C:\\Users\\zhoufengming\\.nuget\\packages\\",
+        "outputPath": "D:\\_Project\\2024quanzhan\\mp3\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\30753\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\zhoufengming\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.library\\mp3.library.csproj": {
-                "projectPath": "C:\\Users\\30753\\RiderProjects\\mp3\\mp3.library\\mp3.library.csproj"
+              "D:\\_Project\\2024quanzhan\\mp3.library\\mp3.library.csproj": {
+                "projectPath": "D:\\_Project\\2024quanzhan\\mp3.library\\mp3.library.csproj"
               }
             }
           }

@@ -20,6 +20,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = mp3.test
-build_property.ProjectDir = C:\Users\30753\RiderProjects\mp3\mp3.test\
+build_property.ProjectDir = D:\_Project\2024quanzhan\mp3.test\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
