@@ -1,0 +1,131 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:u="https://irihi.tech/ursa"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:Class="mp3.Views.DiaryView"
+             DataContext="{Binding DiaryViewModel, Source={StaticResource ServiceLocator}}">
+    <i:Interaction.Behaviors>
+        <ia:EventTriggerBehavior EventName="Initialized">
+            <ia:InvokeCommandAction Command="{Binding OnInitializedCommand}"></ia:InvokeCommandAction>
+        </ia:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
+    <Grid Background="#F5F5F5" RowDefinitions="Auto, *, Auto" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- 搜索栏 -->
+        <Grid Grid.Row="0" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Name="SearchBox"
+                     Grid.Column="0"
+                     Margin="0,0,10,0"
+                     VerticalAlignment="Center"
+                     Text="{Binding SearchKeyword, Mode=TwoWay}" />
+
+
+            <Button Name="SearchButton"
+                    Grid.Column="1"
+                    Content="搜索"
+                    Command="{Binding SearchCommand}"
+                    Margin="0,0,10,0"
+                    Padding="10,5" />
+
+
+            <Button Name="ResetButton"
+                    Grid.Column="2"
+                    Content="刷新"
+                    Command="{Binding ListCommand}"
+                    Padding="10,5" />
+
+            <Button Name="NewButton"
+                    Grid.Column="3"
+                    Content="新增"
+                    Command="{Binding ListCommand}"
+                    Padding="10,5" />
+        </Grid>
+
+        <!-- 列表和内容展示 -->
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer Grid.Column="0" Margin="0,0,10,0">
+                <ListBox ItemsSource="{Binding Diaries}"
+                         SelectedItem="{Binding SelectedDiary, Mode=TwoWay}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="#FFFFFF"
+                                    CornerRadius="10"
+                                    Margin="5"
+                                    Padding="10"
+                                    BoxShadow="0 2 4 #D3D3D3">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding CreateTime}"
+                                               FontSize="16"
+                                               Margin="5" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+
+            <Grid Grid.Column="1" Margin="10">
+                <!-- 定义三行：日期和心情，内容，图片 -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" /> <!-- 第一行：日期和心情 -->
+                    <RowDefinition Height="*" />    <!-- 第二行：内容，允许滚动 -->
+                </Grid.RowDefinitions>
+
+                <!-- 第一行：日期和心情 -->
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <u:DateDisplay
+                        FontSize="24"
+                        StringFormat="yyyy-MM-dd"
+                        Value="{Binding SelectedDiary.CreateTime}" />
+
+                    <TextBlock Text="{Binding SelectedDiary.Mood}"
+                               FontSize="16"
+                               Margin="10,10,0,0" />
+                </StackPanel>
+
+                <!-- 第二行：可滚动的内容 -->
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              Margin="0,15,15,20">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectedDiary.Content}"
+                                   FontSize="16"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,10" />
+                        
+                        <Image Source="D:\Users\zhoufengming\Pictures\Camera Roll\one.jpg"
+                               Width="200"
+                               Height="200" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+
+
+
+        </Grid>
+    </Grid>
+
+</UserControl>

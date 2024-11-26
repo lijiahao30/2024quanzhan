@@ -1,0 +1,94 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:u="https://irihi.tech/ursa"
+             mc:Ignorable="d" 
+             d:DesignWidth="800" 
+             d:DesignHeight="450"
+             x:Class="mp3.Views.EditDiaryView">
+    <Grid Background="#F5F5F5" RowDefinitions="Auto, *, Auto" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />  <!-- 使第一个列占据可用空间 -->
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button Name="ReturnButton"
+                    Grid.Column="3"
+                    Content="返回"
+                    Margin="0,0,10,0"
+                    Padding="10,5" />
+            <Button Name="GeneratehButton"
+                    Grid.Column="1"
+                    Content="生成"
+                    Margin="0,0,10,0"
+                    Padding="10,5" />
+            <Button Name="SaveButton"
+                    Grid.Column="2"
+                    Content="保存"
+                    Margin="0,0,10,0"
+                    Padding="10,5" />
+  
+        </Grid>
+        
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Column="0" Margin="10">
+                
+            </Grid>
+            <Grid Grid.Column="1" Margin="10">
+                <ScrollViewer>
+                    <TextBox Name="CueWordsBox"
+                             Margin="0,0,10,0"
+                             VerticalAlignment="Top"
+                             AcceptsReturn="True"
+                             Text="111"
+                             TextWrapping="Wrap"
+                             Height="100"
+                             VerticalContentAlignment="Top"
+                             FontSize="16" />
+                </ScrollViewer>
+            </Grid>
+            <Grid Grid.Column="2" Margin="10">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              Margin="0,15,15,20">
+                    <StackPanel>
+                        <TextBlock Text="222"
+                                   FontSize="16"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,10" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            
+        </Grid>
+        
+        <Grid Grid.Row="2" Margin="10">
+            <ScrollViewer>
+                <TextBox Name="EditBox"
+                         Margin="5,5,5,5"
+                         VerticalAlignment="Top"
+                         AcceptsReturn="True"
+                         Text="111"
+                         TextWrapping="Wrap"
+                         VerticalContentAlignment="Top"
+                         FontSize="16" />
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

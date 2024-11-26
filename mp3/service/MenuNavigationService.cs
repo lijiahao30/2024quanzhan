@@ -10,6 +10,8 @@ public class MenuNavigationService : IMenuNavigationService {
            
             MenuNavigationConstant.Mp3PlayerView=>ServiceLocator.Current
                 .Mp3PlayerViewModel,
+            MenuNavigationConstant.DiaryView=>ServiceLocator.Current
+                .DiaryViewModel,
             _ => throw new Exception("未知的视图。")
         };
 

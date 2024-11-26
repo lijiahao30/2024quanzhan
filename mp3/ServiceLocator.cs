@@ -46,6 +46,9 @@ namespace mp3
             serviceCollection.AddSingleton<IContentNavigationService, ContentNavigationService>();
             serviceCollection.AddHttpClient();
             serviceCollection.AddSingleton<MainViewModel>();
+            
+            serviceCollection.AddSingleton<DiaryViewModel>();
+            serviceCollection.AddSingleton<IDiaryStorage, DiaryStorage>();
          
             _serviceProvider = serviceCollection.BuildServiceProvider();
             
@@ -61,6 +64,9 @@ namespace mp3
         _serviceProvider.GetRequiredService<InitializationViewModel>();
         public MainViewModel MainViewModel =>
         _serviceProvider.GetRequiredService<MainViewModel>();
+        
+        public DiaryViewModel DiaryViewModel =>
+            _serviceProvider.GetService<DiaryViewModel>();
         
     }
 
